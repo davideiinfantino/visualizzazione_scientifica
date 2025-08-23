@@ -30,34 +30,29 @@ plt.plot(df["Year"], df["TotalGross_Billion"], marker="o", linestyle="-", color=
 # Colora l'area sotto la curva senza etichetta per la legenda
 plt.fill_between(df["Year"], df["TotalGross_Billion"], color="#cc0000", alpha=0.3)
 
-plt.title("Botteghino Mondiale (2000–2010)", fontsize=14)
 plt.xlabel("Anno", fontsize=12)
 plt.ylabel("Incassi totali (Miliardi $)", fontsize=12)
 plt.grid(True, alpha=0.3)
-
-# Aggiungi etichette solo per il primo e ultimo punto con posizionamento ottimizzato
+# Etichette solo per il primo e l'ultimo punto
 first_year = df["Year"].iloc[0]
 first_value = df["TotalGross_Billion"].iloc[0]
 last_year = df["Year"].iloc[-1]
 last_value = df["TotalGross_Billion"].iloc[-1]
+plt.text(first_year, first_value + 0.08, f"{first_value:.1f}B", ha="center", va="bottom", fontsize=9, fontweight='bold',
+         bbox=dict(boxstyle="round,pad=0.3", facecolor="white", edgecolor="#cc0000", alpha=0.8))
+plt.text(last_year, last_value + 0.08, f"{last_value:.1f}B", ha="center", va="bottom", fontsize=9, fontweight='bold',
+         bbox=dict(boxstyle="round,pad=0.3", facecolor="white", edgecolor="#cc0000", alpha=0.8))
 
-# Calcola l'offset dinamico basato sui valori del grafico
-y_range = max(df["TotalGross_Billion"]) - min(df["TotalGross_Billion"])
-offset = y_range * 0.12  # 12% del range come offset per più spazio
-
-# Etichette con sfondo bianco e bordo per migliore leggibilità
-plt.text(first_year, first_value + offset, f"{first_value:.1f}B", 
-         ha="center", va="bottom", fontsize=10, fontweight='bold',
-         bbox=dict(boxstyle="round,pad=0.4", facecolor="white", edgecolor="#cc0000", alpha=0.9))
-
-plt.text(last_year, last_value + offset, f"{last_value:.1f}B", 
-         ha="center", va="bottom", fontsize=10, fontweight='bold',
-         bbox=dict(boxstyle="round,pad=0.4", facecolor="white", edgecolor="#cc0000", alpha=0.9))
+# Aggiungi etichette solo per il primo e ultimo punto con posizionamento ottimizzato
 
 # Aggiungi la legenda con styling estetico
 plt.legend(loc='upper left', frameon=True, fancybox=True, shadow=True, 
            facecolor='white', edgecolor='#cccccc', framealpha=0.95, 
            fontsize=10, borderpad=0.8)
+
+# Rimuovi margini superiori e destro
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
 
 plt.tight_layout()
 
