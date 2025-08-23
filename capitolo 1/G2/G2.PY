@@ -21,21 +21,19 @@ plt.figure(figsize=(9, 6), facecolor='white')
 ax = plt.gca()
 ax.set_facecolor('white')
 
-bars = plt.bar(df["Year"], df["Releases"], color="#cc0000", alpha=0.8, edgecolor="#cc0000", linewidth=2, label="Numero di Uscite")
+bars = plt.bar(df["Year"], df["Releases"], 
+               color="#cc0000", alpha=0.8, 
+               edgecolor="#990000", linewidth=2, 
+               label="Numero di Uscite",
+               width=0.8)
 
-plt.title("Numero di Uscite Cinematografiche (2000–2010)", fontsize=14)
 plt.xlabel("Anno", fontsize=12)
 plt.ylabel("Numero di Film Rilasciati", fontsize=12)
 plt.grid(True, alpha=0.3)
 
-# Aggiungi etichette sopra ogni barra con posizionamento ottimizzato
-for bar, value in zip(bars, df["Releases"]):
-    plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 8, 
-             f"{int(value)}", ha="center", va="bottom", fontsize=9, fontweight='bold',
-             bbox=dict(boxstyle="round,pad=0.2", facecolor="white", edgecolor="#cc0000", alpha=0.8))
-
-# Imposta i limiti dell'asse y per dare spazio alle etichette
-plt.ylim(0, max(df["Releases"]) * 1.15)
+# Rimuovi margini superiori e destro per un look più moderno
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
 
 # Aggiungi la legenda con styling estetico
 plt.legend(loc='upper left', frameon=True, fancybox=True, shadow=True, 
