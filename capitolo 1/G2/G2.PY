@@ -40,7 +40,8 @@ plt.legend(loc='upper left', frameon=True, fancybox=True, shadow=True,
            facecolor='white', edgecolor='#cccccc', framealpha=0.95, 
            fontsize=10, borderpad=0.8)
 
-plt.tight_layout()
+# Configura le proporzioni del subplot
+plt.subplots_adjust(left=0.11, bottom=0.083, right=0.617, top=0.61, wspace=0.2, hspace=0.2)
 
 # Salva il grafico come immagine
 output_path = os.path.join(os.path.dirname(__file__), "releases_chart.png")

@@ -54,7 +54,8 @@ plt.legend(loc='upper left', frameon=True, fancybox=True, shadow=True,
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 
-plt.tight_layout()
+# Configura le proporzioni del subplot
+plt.subplots_adjust(left=0.11, bottom=0.083, right=0.617, top=0.61, wspace=0.2, hspace=0.2)
 
 # Salva il grafico come immagine
 output_path = os.path.join(os.path.dirname(__file__), "box_office_chart.png")
