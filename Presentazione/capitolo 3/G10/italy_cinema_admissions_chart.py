@@ -55,10 +55,10 @@ last_value = df["AdmissionsMillionsItaly"].iloc[-1]
 plt.text(last_year, last_value + 4, f"{last_value}M", ha="center", va="bottom", fontsize=9, fontweight='bold',
          bbox=dict(boxstyle="round,pad=0.3", facecolor="white", edgecolor="#cc0000", alpha=0.8))
 
-# Aggiungi la legenda con styling estetico sopra il grafico
-plt.legend(loc='lower center', bbox_to_anchor=(0.5, 1.02), frameon=True, fancybox=True, shadow=True, 
+# Aggiungi la legenda con styling estetico
+plt.legend(loc='upper left', frameon=True, fancybox=True, shadow=True, 
            facecolor='white', edgecolor='#cccccc', framealpha=0.95, 
-           fontsize=8, borderpad=0.5)
+           fontsize=10, borderpad=0.8)
 
 # Rimuovi margini superiori e destro
 ax.spines['top'].set_visible(False)

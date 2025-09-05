@@ -29,7 +29,7 @@ colors = {
 }
 
 # Plot
-plt.figure(figsize=(12,8), facecolor='white')
+plt.figure(figsize=(7,6), facecolor='white')
 ax = plt.gca()
 ax.set_facecolor('white')
 
@@ -63,17 +63,17 @@ for country in ["Italy", "Germany"]:
                  bbox=dict(boxstyle="round,pad=0.2", facecolor="white", 
                           edgecolor=colors[country], alpha=0.8))
 
-# Aggiungi la legenda con styling estetico
-plt.legend(loc='lower center', bbox_to_anchor=(0.5, 1.02), frameon=True, fancybox=True, shadow=True, 
+# Aggiungi la legenda con styling estetico fuori dal grafico
+plt.legend(loc='center left', bbox_to_anchor=(1, 0.5), frameon=True, fancybox=True, shadow=True, 
            facecolor='white', edgecolor='#cccccc', framealpha=0.95, 
-           fontsize=9, borderpad=0.6, ncol=3)
+           fontsize=10, borderpad=0.8)
 
 # Rimuovi margini superiori e destro
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 
 # Configura le proporzioni del subplot
-plt.tight_layout()
+plt.subplots_adjust(left=0.11, bottom=0.083, right=0.617, top=0.61, wspace=0.2, hspace=0.2)
 
 # Salva il grafico come immagine
 output_path = os.path.join(os.path.dirname(__file__), "europe_cinema_admissions_chart.png")

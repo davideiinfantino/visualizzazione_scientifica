@@ -32,7 +32,7 @@ colors = {
 }
 
 # Plot
-plt.figure(figsize=(12,8), facecolor='white')
+plt.figure(figsize=(9,6), facecolor='white')
 ax = plt.gca()
 ax.set_facecolor('white')
 
@@ -68,14 +68,14 @@ if not last_year_data.empty:
 # Aggiungi la legenda con styling estetico
 plt.legend(loc='upper left', frameon=True, fancybox=True, shadow=True, 
            facecolor='white', edgecolor='#cccccc', framealpha=0.95, 
-           fontsize=10, borderpad=0.8, ncol=2)
+           fontsize=10, borderpad=0.8)
 
 # Rimuovi margini superiori e destro
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 
 # Configura le proporzioni del subplot
-plt.tight_layout()
+plt.subplots_adjust(left=0.11, bottom=0.083, right=0.617, top=0.61, wspace=0.2, hspace=0.2)
 
 # Salva il grafico come immagine
 output_path = os.path.join(os.path.dirname(__file__), "svod_penetration_chart.png")

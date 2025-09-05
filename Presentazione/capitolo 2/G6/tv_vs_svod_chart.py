@@ -60,10 +60,10 @@ plt.text(tv_first_year, svod_first_value + 8, f"{svod_first_value:.0f}min", ha="
 plt.text(tv_last_year, svod_last_value + 8, f"{svod_last_value:.0f}min", ha="center", va="bottom", fontsize=9, fontweight='bold',
          bbox=dict(boxstyle="round,pad=0.3", facecolor="white", edgecolor="#0066cc", alpha=0.8))
 
-# Aggiungi la legenda con styling estetico sopra il grafico
-plt.legend(loc='lower center', bbox_to_anchor=(0.5, 1.02), frameon=True, fancybox=True, shadow=True, 
+# Aggiungi la legenda con styling estetico
+plt.legend(loc='upper left', frameon=True, fancybox=True, shadow=True, 
            facecolor='white', edgecolor='#cccccc', framealpha=0.95, 
-           fontsize=8, borderpad=0.5, ncol=2)
+           fontsize=10, borderpad=0.8)
 
 # Rimuovi margini superiori e destro
 ax.spines['top'].set_visible(False)

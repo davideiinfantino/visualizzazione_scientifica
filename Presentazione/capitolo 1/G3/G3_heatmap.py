@@ -56,7 +56,7 @@ for country in pivot_data_top.index:
     print(f"- {country}: {avg_val:.0f} schermi medi")
 
 # Crea la heatmap
-plt.figure(figsize=(14, 10), facecolor='white')
+plt.figure(figsize=(9,6), facecolor='white')
 
 # Usa il colormap personalizzato con i rossi
 colors = ['#ffcccc', '#ff9999', '#ff6666', '#cc0000', '#990000', '#660000']

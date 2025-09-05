@@ -70,9 +70,9 @@ ax2.text(box_last_year, svod_last_value + 30, f"{svod_last_value}M", ha="center"
 # Combina le legende di entrambi gli assi
 lines1, labels1 = ax1.get_legend_handles_labels()
 lines2, labels2 = ax2.get_legend_handles_labels()
-ax1.legend(lines1 + lines2, labels1 + labels2, loc='lower center', bbox_to_anchor=(0.5, 1.02), 
+ax1.legend(lines1 + lines2, labels1 + labels2, loc='upper left', 
            frameon=True, fancybox=True, shadow=True, facecolor='white', edgecolor='#cccccc', 
-           framealpha=0.95, fontsize=8, borderpad=0.5, ncol=2)
+           framealpha=0.95, fontsize=10, borderpad=0.8)
 
 # Rimuovi margini superiori e destro
 ax1.spines['top'].set_visible(False)
