@@ -1,0 +1,25 @@
+# Visualizzazione Scientifica - Requirements
+# L'Impatto dello Streaming sul Cinema
+
+# Core data manipulation and analysis
+pandas>=1.5.0
+
+# Data visualization
+matplotlib>=3.5.0
+
+# Numerical computing
+numpy>=1.21.0
+
+# Optional: Enhanced data analysis
+scipy>=1.9.0
+
+# Optional: Statistical analysis
+seaborn>=0.11.0
+
+# Optional: Interactive plotting (se necessario)
+plotly>=5.0.0
+
+# Development and documentation
+jupyter>=1.0.0
+
+# Note: os module is built-in with Python, no installation required
