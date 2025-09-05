@@ -32,16 +32,13 @@ visualizzazione_scientifica/
     │   ├── G4/             # Crescita Abbonati Netflix
     │   ├── G5/             # Penetrazione SVOD Globale
     │   ├── G6/             # TV vs Streaming (minuti)
-    │   ├── G7/             # Andamento Streaming vs Box Office
-    │   ├── G8/             # Declino Ammissioni Cinema Europa
-    │   ├── G9/             # Confronto Spesa Cinema vs Streaming
-    │   ├── G10/            # Andamento Spesa Streaming USA
-    │   └── G11/            # Crescita Utenti Streaming USA
+    │   └── G7/             # Andamento Streaming vs Box Office
     ├── capitolo 3/          # Impatto sul botteghino
     │   ├── G8/             # Declino Ammissioni Cinema Europa
     │   ├── G9/             # Confronto Spesa Cinema vs Streaming
     │   └── G10/            # Andamento Spesa Streaming USA
     ├── capitolo 4/          # Offerta e contenuti: cosa guardiamo?
+    │   ├── G11/            # Crescita Utenti Streaming USA
     │   ├── G12/            # Top 10 Serie Netflix
     │   ├── G13/            # Confronto Serie vs Film (Ore)
     │   ├── G14/            # Valutazioni IMDb nel Tempo
@@ -67,7 +64,6 @@ Documenta la rivoluzione digitale e i suoi effetti immediati:
 - **G5**: Penetrazione globale dei servizi SVOD
 - **G6**: Spostamento da TV tradizionale a streaming
 - **G7**: Correlazione inversa streaming-cinema
-- **G11**: Crescita utenti streaming USA
 
 **Insight chiave**: Lo streaming ha trasformato radicalmente le abitudini di consumo.
 
@@ -81,6 +77,7 @@ Analizza l'effetto diretto dello streaming sui ricavi cinematografici:
 
 ### Capitolo 4: Offerta e contenuti - cosa guardiamo?
 Analizza le preferenze del pubblico nell'era streaming:
+- **G11**: Crescita utenti streaming USA
 - **G12**: Le serie TV più popolari su Netflix
 - **G13**: Predominanza delle serie TV sui film (grafico a torta)
 - **G14**: Evoluzione della qualità percepita (valutazioni IMDb)
