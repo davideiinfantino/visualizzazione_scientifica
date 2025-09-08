@@ -1,5 +1,6 @@
 import pandas as pd
-import plotly.graph_objects as go
+import matplotlib.pyplot as plt
+import seaborn as sns
 import numpy as np
 import os
 
@@ -15,221 +16,101 @@ df["FeatureFilmsProduced"] = pd.to_numeric(df["FeatureFilmsProduced"], errors="c
 # Filtra i dati e rimuove eventuali valori NaN
 df = df.dropna()
 
-# Calcola la media per paese nel periodo 2000-2010 per gli schermi
-screens_avg = df.groupby("Country")["Screens"].mean().reset_index()
-screens_avg.columns = ["Country", "AvgScreens"]
-
-# Mappatura completa dei nomi dei paesi per il codice ISO
-country_mapping = {
-    'USA': 'United States',
-    'UK': 'United Kingdom', 
-    'Germany': 'Germany',
-    'France': 'France',
-    'Italy': 'Italy',
-    'India': 'India',
-    'China': 'China',
-    'Japan': 'Japan',
-    'Brazil': 'Brazil',
-    'Canada': 'Canada',
-    'Spain': 'Spain',
-    'Russia': 'Russia',
-    'Mexico': 'Mexico',
-    'Australia': 'Australia',
-    'South Korea': 'South Korea',
-    'Argentina': 'Argentina',
-    'Turkey': 'Turkey',
-    'South Africa': 'South Africa',
-    'Nigeria': 'Nigeria',
-    'Egypt': 'Egypt',
-    'Sweden': 'Sweden',
-    'Norway': 'Norway',
-    'Denmark': 'Denmark',
-    'Finland': 'Finland',
-    'Poland': 'Poland',
-    'Netherlands': 'Netherlands',
-    'Belgium': 'Belgium',
-    'Switzerland': 'Switzerland',
-    'Austria': 'Austria',
-    'Portugal': 'Portugal',
-    'Greece': 'Greece',
-    'Ireland': 'Ireland',
-    'Czech Republic': 'Czech Republic',
-    'Hungary': 'Hungary',
-    'Romania': 'Romania',
-    'Bulgaria': 'Bulgaria',
-    'Slovakia': 'Slovakia',
-    'Slovenia': 'Slovenia',
-    'Croatia': 'Croatia',
-    'Serbia': 'Serbia',
-    'Ukraine': 'Ukraine',
-    'Belarus': 'Belarus',
-    'Lithuania': 'Lithuania',
-    'Latvia': 'Latvia',
-    'Estonia': 'Estonia',
-    'Chile': 'Chile',
-    'Colombia': 'Colombia',
-    'Peru': 'Peru',
-    'Venezuela': 'Venezuela',
-    'Ecuador': 'Ecuador',
-    'Uruguay': 'Uruguay',
-    'Paraguay': 'Paraguay',
-    'Bolivia': 'Bolivia',
-    'Morocco': 'Morocco',
-    'Algeria': 'Algeria',
-    'Tunisia': 'Tunisia',
-    'Kenya': 'Kenya',
-    'Ethiopia': 'Ethiopia',
-    'Ghana': 'Ghana',
-    'Ivory Coast': 'Cote d\'Ivoire',
-    'Tanzania': 'Tanzania',
-    'Uganda': 'Uganda',
-    'Thailand': 'Thailand',
-    'Vietnam': 'Vietnam',
-    'Philippines': 'Philippines',
-    'Malaysia': 'Malaysia',
-    'Indonesia': 'Indonesia',
-    'Pakistan': 'Pakistan',
-    'Bangladesh': 'Bangladesh',
-    'Iran': 'Iran',
-    'Iraq': 'Iraq'
-}
-
-screens_avg["CountryISO"] = screens_avg["Country"].map(country_mapping)
-
 print("Dati disponibili:")
-print(screens_avg)
+print(df.head())
 
-# Configurazioni per diverse viste continentali
-continental_views = {
-    "Europa": {"lon": 10, "lat": 50, "title": "Schermi Cinematografici - Europa (Media 2000-2010)"},
-    "Nord_America": {"lon": -100, "lat": 45, "title": "Schermi Cinematografici - Nord America (Media 2000-2010)"},
-    "Sud_America": {"lon": -60, "lat": -15, "title": "Schermi Cinematografici - Sud America (Media 2000-2010)"},
-    "Asia": {"lon": 100, "lat": 30, "title": "Schermi Cinematografici - Asia (Media 2000-2010)"},
-    "Africa": {"lon": 20, "lat": 0, "title": "Schermi Cinematografici - Africa (Media 2000-2010)"},
-    "Oceania": {"lon": 135, "lat": -25, "title": "Schermi Cinematografici - Oceania (Media 2000-2010)"}
-}
-
-# Crea una figura per ogni continente
-figures = {}
-output_paths = {}
-
-for continent, config in continental_views.items():
-    fig = go.Figure(data=go.Choropleth(
-        locations=screens_avg["CountryISO"],
-        z=screens_avg["AvgScreens"],
-        locationmode='country names',
-        colorscale=[[0, '#ffcccc'], [0.5, '#cc0000'], [1, '#660000']],
-        colorbar_title="Schermi Medi",
-        hovertemplate='<b>%{location}</b><br>Schermi: %{z:.0f}<extra></extra>',
-    ))
-    
-    fig.update_layout(
-        title=config["title"],
-        geo=go.layout.Geo(
-            showframe=False,
-            showcoastlines=True,
-            coastlinecolor="white",
-            showland=True,
-            landcolor='lightgray',
-            showocean=True,
-            oceancolor='lightblue',
-            projection_type='orthographic',
-            projection_rotation={"lon": config["lon"], "lat": config["lat"], "roll": 0},
-            center={"lon": config["lon"], "lat": config["lat"]},
-            showlakes=False,
-            showcountries=True,
-            countrycolor="white"
-        ),
-        width=900,
-        height=700,
-        paper_bgcolor='white',
-        plot_bgcolor='white'
-    )
-    
-    figures[continent] = fig
-    
-    # Salva ogni vista continentale
-    output_path = os.path.join(os.path.dirname(__file__), f"globe_3d_{continent.lower()}.html")
-    fig.write_html(output_path)
-    output_paths[continent] = output_path
-    print(f"Vista {continent} salvata come: {output_path}")
-    
-    # Salva anche come immagine PNG (richiede kaleido)
-    try:
-        png_path = os.path.join(os.path.dirname(__file__), f"globe_3d_{continent.lower()}.png")
-        fig.write_image(png_path, width=900, height=700, scale=2)
-        print(f"Immagine {continent} salvata come: {png_path}")
-    except Exception as e:
-        print(f"Impossibile salvare PNG per {continent}: {e}")
-
-# Vista globale originale
-fig_global = go.Figure(data=go.Choropleth(
-    locations=screens_avg["CountryISO"],
-    z=screens_avg["AvgScreens"],
-    locationmode='country names',
-    colorscale=[[0, '#ffcccc'], [0.5, '#cc0000'], [1, '#660000']],
-    colorbar_title="Schermi Medi",
-    hovertemplate='<b>%{location}</b><br>Schermi: %{z:.0f}<extra></extra>',
-))
-
-fig_global.update_layout(
-    title="Schermi Cinematografici - Vista Globale (Media 2000-2010)",
-    geo=go.layout.Geo(
-        showframe=False,
-        showcoastlines=True,
-        coastlinecolor="white",
-        showland=True,
-        landcolor='lightgray',
-        showocean=True,
-        oceancolor='lightblue',
-        projection_type='orthographic',
-        projection_rotation={"lon": 0, "lat": 30, "roll": 0},
-        center={"lon": 0, "lat": 30},
-        showlakes=False,
-        showcountries=True,
-        countrycolor="white"
-    ),
-    width=900,
-    height=700,
-    paper_bgcolor='white',
-    plot_bgcolor='white'
+# Crea una matrice pivot con Years come colonne e Countries come righe
+pivot_data = df.pivot_table(
+    index='Country', 
+    columns='Year', 
+    values='Screens', 
+    aggfunc='mean',
+    fill_value=0
 )
 
-# Salva la vista globale
-output_path_global = os.path.join(os.path.dirname(__file__), "globe_3d_global.html")
-fig_global.write_html(output_path_global)
-print(f"Vista Globale salvata come: {output_path_global}")
+# Filtra solo i paesi con dati significativi (almeno 3 anni di dati)
+countries_with_data = pivot_data.sum(axis=1)
+countries_filtered = countries_with_data[countries_with_data > 0].index
+pivot_data_filtered = pivot_data.loc[countries_filtered]
 
-# Salva anche come PNG
-try:
-    png_path_global = os.path.join(os.path.dirname(__file__), "globe_3d_global.png")
-    fig_global.write_image(png_path_global, width=900, height=700, scale=2)
-    print(f"Immagine Globale salvata come: {png_path_global}")
-except Exception as e:
-    print(f"Impossibile salvare PNG globale: {e}")
+# Ordina i paesi per numero medio di schermi (dal maggiore al minore)
+avg_screens = pivot_data_filtered.mean(axis=1).sort_values(ascending=False)
+pivot_data_sorted = pivot_data_filtered.loc[avg_screens.index]
 
-# Mostra la vista globale
-print("\nAprendo la vista globo 3D...")
-fig_global.show()
+# Forza l'inclusione dell'Italia se non è nei top paesi
+top_countries = 15  # Ridotto per migliore leggibilità
+pivot_data_top = pivot_data_sorted.head(top_countries)
 
-print("\nRiassunto dati per paese (Media 2000-2010):")
+# Verifica se l'Italia è nei dati e la aggiunge se non c'è
+if 'Italy' in pivot_data_filtered.index and 'Italy' not in pivot_data_top.index:
+    # Rimuove l'ultimo paese e aggiunge l'Italia
+    pivot_data_top = pivot_data_top.drop(pivot_data_top.index[-1])
+    italy_data = pivot_data_filtered.loc[['Italy']]
+    pivot_data_top = pd.concat([pivot_data_top, italy_data])
+    print("🇮🇹 Italia aggiunta forzatamente alla visualizzazione!")
+
+# Dataset finale per la visualizzazione
+pivot_data_display = pivot_data_top
+
+print(f"\nCreando heatmap per i top {len(pivot_data_display)} paesi...")
+print("Paesi inclusi:")
+for country in pivot_data_display.index:
+    avg_val = pivot_data_display.loc[country].mean()
+    print(f"- {country}: {avg_val:.0f} schermi medi")
+
+# Crea la heatmap con dimensioni migliorate
+plt.figure(figsize=(12,8), facecolor='white')
+
+# Usa il colormap personalizzato con i rossi
+colors = ['#ffeeee', '#ffcccc', '#ff9999', '#ff6666', '#cc0000', '#990000', '#660000']
+custom_cmap = sns.blend_palette(colors, as_cmap=True)
+
+# Prendi solo i top 15 paesi per una migliore leggibilità
+pivot_data_display = pivot_data_top.head(15)
+
+# Crea la heatmap con annotazioni più grandi
+heatmap = sns.heatmap(
+    pivot_data_display,
+    annot=True,
+    fmt='.0f',
+    cmap=custom_cmap,
+    cbar_kws={'label': 'Numero di Schermi', 'shrink': 0.8},
+    linewidths=1,
+    linecolor='white',
+    annot_kws={'size': 10, 'weight': 'bold', 'color': 'black'},
+    square=False,
+    xticklabels=True,
+    yticklabels=True
+)
+
+# Personalizza il grafico
+plt.xlabel('Anno', fontsize=14, fontweight='bold')
+plt.ylabel('Paese', fontsize=14, fontweight='bold')
+
+# Ruota le etichette dell'asse x per una migliore leggibilità
+plt.xticks(rotation=0, fontsize=12)
+plt.yticks(rotation=0, fontsize=11)
+
+# Titolo del grafico
+plt.title('Schermi Cinematografici per Paese (2000-2010)', fontsize=16, fontweight='bold', pad=20)
+
+# Configura le proporzioni del subplot per migliore visibilità
+plt.subplots_adjust(left=0.15, bottom=0.1, right=0.9, top=0.85, wspace=0.2, hspace=0.2)
+
+# Salva il grafico
+output_path = os.path.join(os.path.dirname(__file__), "G3_heatmap.png")
+plt.savefig(output_path, dpi=300, bbox_inches='tight', facecolor='white')
+print(f"\nHeatmap salvata come: {output_path}")
+
+# Mostra il grafico
+plt.show()
+
+print("\n📊 HEATMAP GENERATA!")
 print("=" * 50)
-for _, row in screens_avg.iterrows():
-    print(f"{row['Country']}: {row['AvgScreens']:.0f} schermi")
-
-print("\n" + "=" * 60)
-print("ISTRUZIONI PER L'USO:")
-print("1. Vista Globo 3D: Simula un mappamondo sferico, ruotabile con il mouse")
-print("2. Intensità colore rosso = Maggior numero di schermi cinematografici")
-print("3. Passa il mouse sui paesi per vedere i valori esatti")
-print("4. Usa i controlli del mouse per ruotare, zoomare e esplorare il globo")
-print("\nFILE GENERATI PER LA PRESENTAZIONE:")
-print("- globe_3d_global.png/html: Vista mondiale completa")
-print("- globe_3d_europa.png/html: Focalizzata sull'Europa")
-print("- globe_3d_nord_america.png/html: Focalizzata sul Nord America")  
-print("- globe_3d_sud_america.png/html: Focalizzata sul Sud America")
-print("- globe_3d_asia.png/html: Focalizzata sull'Asia")
-print("- globe_3d_africa.png/html: Focalizzata sull'Africa")
-print("- globe_3d_oceania.png/html: Focalizzata sull'Oceania")
-print("\n📊 I file PNG sono pronti per essere inseriti nella presentazione!")
-print("=" * 60)
+print("CARATTERISTICHE:")
+print("• Colori rossi: Intensità proporzionale al numero di schermi")
+print("• Righe: Paesi (ordinati per numero medio di schermi)")
+print("• Colonne: Anni dal 2000 al 2010")
+print("• Numeri: Valori esatti di schermi per paese/anno")
+print("• Top 15 paesi con più schermi cinematografici")
+print(f"• Risoluzione alta (300 DPI) salvata in: {output_path}")
