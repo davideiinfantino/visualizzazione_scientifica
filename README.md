@@ -1,6 +1,7 @@
-# Visualizzazione Scientifica - L'Impatto dello Streaming sul Cinema
+# Visualizzazione Scientifica - Cinema nell’era dello streaming
 
-# Visualizzazione Scientifica - L'Impatto dello Streaming sul Cinema
+## Link Presentazione Canva
+https://www.canva.com/design/DAGwnkLCwDg/igQ_OXWbBR_g2rInjhEOQg/edit?utm_content=DAGwnkLCwDg&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
 ## Descrizione del Progetto
 
