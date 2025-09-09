@@ -222,7 +222,7 @@ Questo studio dimostra l'efficacia della **visualizzazione dati** per:
 La standardizzazione visiva permette confronti immediati tra diversi aspetti della trasformazione, creando una narrativa coerente e convincente.
 
 ## Autore
-
+Alessandro Lia 25994A - Davide Infantino 12875A
 Progetto di Visualizzazione Scientifica - Sessione Settembre 2025
 
 ## Licenza
